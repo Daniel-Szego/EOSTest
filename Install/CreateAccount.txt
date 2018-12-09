@@ -1,0 +1,33 @@
+# Unlock wallet
+
+cleos wallet unlock
+
+# Set default system contract, eosio.bios 
+
+cleos set contract eosio contracts/eosio.bios -p eosio@active # sign with active authority of the eosio
+
+echo "Create an user..."
+
+# Create a key pair for the 'user'
+
+cleos create key --to-console >> userkeys
+
+# Import the key into wallet 
+
+pvkey="$(grep "Private" userkeys | awk '{print $3}')"
+
+cleos wallet import --private-key "$pvkey"
+
+# Create the account 'user' 
+
+pbkey="$(grep "Public" userkeys | awk '{print $3}')"
+
+cleos create account eosio user "$pbkey" "$pbkey"
+
+# Use same key to create 'tester' 
+
+cleos create account eosio tester "$pbkey" "$pbkey"
+
+# test
+
+cleos get accounts "$pbkey"
