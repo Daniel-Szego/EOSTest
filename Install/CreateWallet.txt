@@ -1,0 +1,12 @@
+# Create default wallet and store master password, "defaultmaster" is the master password unlocking the wallet
+
+cleos wallet create --to-console >> defaultmaster
+
+# test if wallet is created
+
+cleos wallet list
+
+# load default private key
+
+cleos wallet import --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
+
